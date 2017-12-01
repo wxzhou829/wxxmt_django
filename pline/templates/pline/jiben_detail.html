@@ -1,0 +1,108 @@
+{% extends "base_left1.html" %}
+
+{% block content %}
+<div class='panel panel-primary'>
+  <div class='panel-heading'> 
+  <h3 class='panel-title'> 生产明细</h3>
+  </div >    
+</div> 
+ <h3>{{ jiben.get_pline_display }}({{jiben.date}})</h3>
+  <ul>
+    <li>投入量： {{ jiben.trl  }}</li>
+    <li>处理面积： {{ jiben.clmj  }} </li>
+    <li>开机时间： {{ jiben.kjcs  }} </li>
+    <li>开机时数： {{ jiben.scss  }} </li>
+    <li>应有杆数： {{ jiben.yygs  }} </li>
+    <li>安培小时计： {{ jiben.amp  }}  </li>
+    <li>用水量： {{ jiben.shui }}  </li>
+    <li>用电量： {{ jiben.dian  }} </li>
+  </ul>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>药水明细(总面积 ：{{yao_count.clmj__sum}} 总数量：{{yao_count.clsl__sum}} 总杆数：{{yao_count.clts__sum}} )</h4>
+
+    <table class='table'>
+      <tr>
+        <th>药水名称</th>
+        <th>处理面积</th>
+        <th>处理数量</th>
+        <th>处理桶（杆）数</th>
+        <th>累积面积</th>
+      </tr>
+      {% for yao in jiben.yao_set.all %}
+      <tr>
+        <td>{{yao.get_yao_display}}</td>
+        <td>{{yao.clmj}}</td>
+        <td>{{yao.clsl}}</td>
+        <td>{{yao.clts}}</td>
+        <td>{{yao.ljmj}}</td>
+      </tr>    
+      {% endfor %}
+    </table>
+    <hr>
+    <h4>未稼动：{{num}}</h4>
+    <ul>
+        {% if jiben.ddw %}
+        <li>品质等待： {{ jiben.ddw  }}</li>
+        {% endif %}
+        {% if jiben.cfw %}
+        <li>换班吃饭： {{ jiben.cfw  }} </li>
+        {% endif %}
+        {% if jiben.dqw %}
+        <li>货源短缺： {{ jiben.dqw  }} </li>
+        {% endif %}
+        {% if jiben.wcw %}
+        <li>开关机误差： {{ jiben.wcw  }} </li>
+        {% endif %}
+        {% if jiben.qtw %}
+        <li>其他： {{ jiben.qtw  }} </li>
+        {% endif %}
+        {% if gz_count.shu__sum %}
+        <li>故障： {{ gz_count.shu__sum  }} </li>
+        {% endif %}
+    </ul> 
+    {% if gz_count.shu__sum %}
+    <table class='table'>
+      <tr>
+        <th>故障原因</th>
+        <th>故障数量</th>
+        <th>发生时间</th>
+        <th>修复时间</th>
+        <th>班次</th>
+      </tr>
+      {% for gz in jiben.guzhang_set.all %}
+        <tr>
+          <td>{{gz.name}}</td>
+          <td>{{gz.shu}}</td>
+          <td>{{gz.f_date}}</td>
+          <td>{{gz.x_date}}</td>
+          <td>{{gz.banci}}</td>        
+        </tr>            
+      {% endfor %}
+      </table>
+    {% endif %}    
+    <hr>
+    <h4>不良杆数：{{ jiben.sum_bl}}</h4>
+    <ul>
+        {% if jiben.sc_count %}
+        <li>色差数量：<strong> {{ jiben.sc_count}} </strong> 色差原因：<strong> {{ jiben.get_scy_display}} </strong></li>
+        {% endif %}
+        {% if jiben.mh_count %}
+        <li>膜厚数量：<strong> {{ jiben.mh_count}} </strong> 膜厚原因：<strong> {{ jiben.get_mhy_display}} </strong></li>
+        {% endif %}
+        {% if jiben.cs_count %}
+        <li>错色数量：<strong> {{ jiben.cs_count}} </strong> 错色原因：<strong> {{ jiben.get_csy_display}} </strong></li>
+        {% endif %}
+        {% if jiben.qp_count %}
+        <li>气泡数量：<strong> {{ jiben.qp_count}} </strong> 气泡原因：<strong> {{ jiben.get_qpy_display}} </strong></li>
+        {% endif %}
+        {% if jiben.ct_count %}
+        <li>出铁数量：<strong> {{ jiben.ct_count}} </strong> 出铁原因：<strong> {{ jiben.get_cty_display}} </strong></li>
+        {% endif %}
+        {% if jiben.qt_count %}
+        <li>其他数量：<strong> {{ jiben.qt_count}} </strong> 其他原因：<strong> {{ jiben.get_qty_display}} </strong></li>
+        {% endif %}
+    </ul>    
+  </div>
+
+{% endblock %}

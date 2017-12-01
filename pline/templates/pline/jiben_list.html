@@ -1,0 +1,48 @@
+{% extends "base_left1.html" %}
+
+{% block content %}
+<div class='panel panel-primary'>
+  <div class='panel-heading'> 
+  <h3 class='panel-title'>  基本信息列表</h3>
+  </div >    
+ </div> 
+ <h4>
+        <a href="{% url 'jbfilter' 1 %}">PG2</a>  | 
+        <a href="{% url 'jbfilter' 2 %}">PG3</a> | 
+        <a href="{% url 'jbfilter' 3 %}">PD3</a>
+ </h4>
+
+    {% if jiben_list %}
+    <table class='table'>
+      <tr>
+        <th>线别</th>
+        <th>日期</th>
+        <th>投入量</th>
+        <th>处理面积</th>
+        <th>开机次数</th>
+        <th>生产时数</th>
+        <th>应有杆数</th>
+        <th>安培小时计</th>
+        <th>用水量</th>
+        <th>用电量</th>
+      </tr>
+      {% for jiben in jiben_list %}
+      <tr>
+        <td><a href='{{ jiben.get_absolute_url }}'>{{ jiben.get_pline_display  }}</a></td>      
+        <td>{{ jiben.date  }}</td>       
+        <td>{{ jiben.trl  }}</td>        
+        <td>{{ jiben.clmj  }}</td>       
+        <td>{{ jiben.kjcs  }}</td>       
+        <td>{{ jiben.scss  }}</td>       
+        <td>{{ jiben.yygs  }}</td>       
+        <td>{{ jiben.amp  }}</td>        
+        <td>{{ jiben.shui }}</td>        
+        <td>{{ jiben.dian  }}</td>      
+      </tr>                              
+      {% endfor %}                       
+                                             
+    </table>                                 
+    {% else %}
+      <p>没有信息！</p>
+    {% endif %}       
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ '无锡元泰'|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">无锡元泰后台管理</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

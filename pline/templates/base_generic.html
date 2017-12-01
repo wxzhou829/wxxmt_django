@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html >
+<head>
+  
+  {% block title %}<title>无锡元泰</title>{% endblock %}
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+  <script src="{% static 'js/jquery.min.js' %} "></script>
+  <script src="{% static 'js/bootstrap.min.js' %} "></script>
+  
+  <!-- Add additional CSS in static file -->
+
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <!-- Head -->
+    <div class="row">
+        <canvas id='myCanvas' width="360" height="100"></canvas>
+        <canvas id='myCanvas1' width="440" height="100"></canvas>    
+    </div>
+    <script src="{% static 'js/header.js' %} "></script>
+    <script src="{% static 'js/ball.js' %} "></script>
+
+<nav class='navbar navbar-inverse' role="navigation">
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <a class='navbar-brand' href="{% url 'index' %}"><span class='glyphicon glyphicon-home'> 首页 </span></a>
+        </div>
+        <div>
+            <ul id='nav-ul' class='nav navbar-nav'>
+{% block navi %}{% endblock %}
+            </ul>
+        </div>    
+    </div>
+</nav>
+
+    <!-- Navigate -->
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-sm-2">
+      {% block sidebar %}
+      {% endblock %}
+      </div>
+      <div class="col-sm-10 ">
+      {% block content %}{% endblock %}
+      {% block pagination %}
+      {% if is_paginated %}
+          <div class="pagination">
+              <span class="page-links">
+                  {% if page_obj.has_previous %}
+                      <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">上一页</a>
+                  {% endif %}
+                  <span class="page-current">
+                      第{{ page_obj.number }}页/共{{ page_obj.paginator.num_pages }}页
+                  </span>
+                  {% if page_obj.has_next %}
+                      <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">下一页</a>
+                  {% endif %}
+              </span>
+          </div>
+      {% endif %}
+      {% endblock %}      
+      
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

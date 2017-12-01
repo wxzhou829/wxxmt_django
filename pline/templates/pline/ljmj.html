@@ -1,0 +1,56 @@
+{% extends "base_left1.html" %}
+{% block content %}
+<div class='panel panel-primary'>
+  <div class='panel-heading'> 
+  <h3 class='panel-title'> 各线累积面积</h3>
+  </div >    
+</div> 
+<h3>PG3</h3>
+<ul>
+  
+  <li class="
+  {% if yao.pg3441A > 400000 %}
+  text-danger
+  {% endif %}
+  ">441A   累积面积：<strong>{{ yao.pg3441A }}</strong> (40万)</li>
+  <li class="
+  {% if yao.pg3444CS > 900000 %}
+  text-danger
+  {% endif %}  
+  ">444CS  累积面积：<strong>{{ yao.pg3444CS }}</strong>(90万)</li>
+</ul>
+<hr>
+<h3>PD3</h3>
+<ul>
+  <li class="
+  {% if yao.pd3124 > 6000000 %}
+  text-danger
+  {% endif %}  
+  ">124   累积面积：<strong>{{ yao.pd3124 }}</strong> (600万)</li>
+  <li class="
+  {% if yao.pd3444S > 20000000 %}
+  text-danger
+  {% endif %}  
+  ">444S  累积面积：<strong>{{ yao.pd3444S }}</strong> (2000万)</li>
+  <li>447S  累积面积：<strong>{{ yao.pd3447S }}</strong></li>
+</ul>
+<hr>
+<h3>PG2</h3>
+<ul>
+  <li class="
+  {% if yao.pg2441A > 600000 %}
+  text-danger
+  {% endif %}  
+  ">B   累积面积：<strong>{{ yao.pg2441A }}</strong> (60万)</li>
+  <li class="
+  {% if yao.pg2444CS > 3200000 %}
+  text-danger
+  {% endif %}  
+  ">C  累积面积：<strong>{{ yao.pg2444CS }}</strong> (320万)</li>
+  <li>K  累积面积：<strong>{{ yao.pg2447MD }}</strong></li>
+
+</ul>
+
+{% endblock %}
+
+

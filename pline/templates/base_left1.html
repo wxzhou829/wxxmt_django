@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+{% block navi %}
+    <li id='nav-sczc' class='active'><a href="{% url 'jiben' %}"> 生产制程 </a></li>
+    <li id='nav-sbwx' ><a href=''> 设备维修 </a></li>
+    <li id='nav-sbpj' ><a href=''> 设备配件 </a></li>
+{% endblock %}                
+{% block sidebar %}
+<ul class="sidebar-nav">
+    <li><a href="{% url 'jiben' %}">生产线</a></li> 
+    <li><a href="{% url 'ljmj' %}">累积面积</a></li>
+    <li><a href="{% url 'buliang' %}">不良查询</a></li>
+    <li><a href="{% url 'jianyu' %}">建浴查询</a></li>
+</ul>
+{% endblock %}

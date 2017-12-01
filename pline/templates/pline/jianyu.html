@@ -1,0 +1,28 @@
+{% extends "base_left1.html" %}
+{% block content %}
+<div class='panel panel-primary'>
+  <div class='panel-heading'> 
+  <h3 class='panel-title'> 各槽建浴面积及时间表</h3>
+  </div >    
+</div>
+<table class="table">
+<tr>
+  <th>槽名</th>
+  <th>建浴面积(万)</th>
+  <th>累积面积(万)</th>
+  <th>建浴时间</th>
+</tr>
+{% for jian in jy %}
+    <tr>
+        <td>{{jian.name}}</td>
+        <td>{{jian.mianji}}</td>
+        <td class="
+  {% if jian.clmj > jian.mianji  %}
+  text-danger
+  {% endif %}  
+  ">{{jian.clmj}}</td>
+        <td>{{jian.date}}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
